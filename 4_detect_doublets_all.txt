@@ -1,0 +1,9 @@
+java -jar /home/dol24jn/software/Drop-seq_tools-2.5.4/jar/dropseq.jar DetectDoublets \
+--INPUT_BAM /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/C_P2-5-11-25-30_merged_merged_gene_function_tagged.bam \
+--VCF /scratch-rz/users/dol24jn/vierbuchen/vcf_files/sampleC_version2/final.vcf.gz \
+--SINGLE_DONOR_LIKELIHOOD_FILE /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/C_P2-5-11-25-30_demultiplexed_version2.txt \
+--OUTPUT /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/C_P2-5-11-25-30_detect_doublets.txt \
+--CELL_BC_FILE /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/cell_barcodes.txt \
+--SAMPLE_FILE /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/samples.txt \
+--OUTPUT_ALL_PAIRS /scratch-rz/users/dol24jn/vierbuchen/results/C_P2-5-11-25-30_merged/C_P2-5-11-25-30_detect_doublets_all.txt
+

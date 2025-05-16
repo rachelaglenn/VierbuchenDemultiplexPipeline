@@ -1,0 +1,37 @@
+#step by step:
+
+java -jar /home/dol24jn/software/Drop-seq_tools-2.5.4/jar/lib/picard-2.26.10.jar CreateSequenceDictionary \
+REFERENCE="Mus_musculus.GRCm38.dna.primary_assembly.fa" \
+OUTPUT= "/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.dict" \
+SPECIES=GRCm38
+
+
+java -jar /home/dol24jn/software/Drop-seq_tools-2.5.4/jar/dropseq.jar ConvertToRefFlat \
+ANNOTATIONS_FILE="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.102.gtf" \
+SEQUENCE_DICTIONARY="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.dict" \
+OUTPUT="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.refFlat"
+
+
+java -jar /home/dol24jn/software/Drop-seq_tools-2.5.4/jar/dropseq.jar ReduceGtf \
+SEQUENCE_DICTIONARY="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.dict" \
+GTF="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.102.gtf" \
+OUTPUT="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.102.reduced.gtf"
+
+
+
+java -jar /home/dol24jn/software/Drop-seq_tools-2.5.4/jar/dropseq.jar CreateIntervalsFiles \
+SEQUENCE_DICTIONARY="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.dict" \
+REDUCED_GTF="/home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.102.reduced.gtf" \
+PREFIX=Mus_musculus.GRCm38. \
+OUTPUT="/home/dol24jn/software/database/dropseq_GRCm38/" \
+MT_SEQUENCE=MT
+
+#create STAR genome
+~/software/STAR/STAR/bin/Linux_x86_64_static/STAR \
+--runThreadN 64 \
+--runMode genomeGenerate \
+--genomeDir /home/dol24jn/software/database/dropseq_GRCm38/STAR \
+--genomeFastaFiles /home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.dna.primary_assembly.fa \
+--sjdbGTFfile /home/dol24jn/software/database/dropseq_GRCm38/Mus_musculus.GRCm38.102.gtf
+
+
